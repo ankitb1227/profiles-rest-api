@@ -1,9 +1,9 @@
-from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets
 
 from . import serlializers
+from .models import UserProfile
 
 
 class HelloApiView(APIView):
@@ -32,3 +32,10 @@ class HelloApiView(APIView):
     def put(self, request, pk=None):
         """handle updating the object"""
         return Response({'method': 'patch'})
+
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """Handle creating and updating profiles"""
+
+    serializer_class = serlializers.UserProfileSerializer
+    queryset = UserProfile.objects.all()
